@@ -1,0 +1,13 @@
+{
+  "name": "@repo/eslint-config",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./base": "./base.ts",
+    "./backend": "./backend.ts"
+  },
+  "devDependencies": {
+    "jiti": "^2.4.2"
+  }
+}
