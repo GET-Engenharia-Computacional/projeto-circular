@@ -1,22 +1,40 @@
 import { serve } from "@hono/node-server";
+import { createNodeWebSocket } from "@hono/node-ws";
 import { Hono } from "hono";
 
-const app = new Hono()
+const app = new Hono();
+
+// eslint-disable-next-line @typescript-eslint/unbound-method
+const { injectWebSocket, upgradeWebSocket } = createNodeWebSocket({ app });
+
+const routes = app
   .get("/", (context) => {
     return context.text("Hello Hono!");
   })
-  .get("/teste", (c) => {
-    return c.text("Hello");
-  });
+  .get(
+    "/bus-location",
+    upgradeWebSocket(() => {
+      return {
+        onMessage(event, websocket) {
+          const message = event.data.valueOf();
+
+          websocket.send(
+            typeof message == "object" ? JSON.stringify(message) : message,
+          );
+        },
+      };
+    }),
+  );
 
 const port = 3000;
 console.log(`Server is running on http://localhost:${port.toString()}`);
 
-serve({
-  fetch: app.fetch,
+const server = serve({
+  fetch: routes.fetch,
   port,
 });
 
-type App = typeof app;
+injectWebSocket(server);
 
+type App = typeof routes;
 export type { App };
