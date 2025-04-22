@@ -22,7 +22,7 @@
     "typescript": "5.5.4",
     "typescript-eslint": "^8.24.0"
   },
-  "packageManager": "pnpm@10.2.1",
+  "packageManager": "pnpm@10.9.0",
   "engines": {
     "node": ">=18"
   }
