@@ -26,6 +26,7 @@ coverage
 out/
 build
 dist
+generated/
 
 
 # Debug
@@ -39,3 +40,8 @@ yarn-error.log*
 
 # Build artifacts
 ios/
+android/
+
+# Database
+dev.db
+dev.db-journal

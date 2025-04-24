@@ -1,6 +1,7 @@
 import { serve } from "@hono/node-server";
 import { createNodeWebSocket } from "@hono/node-ws";
 import { Hono } from "hono";
+import { buses, busLocation } from "./bus-location.js";
 
 const app = new Hono();
 
@@ -9,22 +10,9 @@ const { injectWebSocket, upgradeWebSocket } = createNodeWebSocket({ app });
 
 const routes = app
   .get("/", (context) => {
-    return context.text("Hello Hono!");
+    return context.text(JSON.stringify(buses));
   })
-  .get(
-    "/bus-location",
-    upgradeWebSocket(() => {
-      return {
-        onMessage(event, websocket) {
-          const message = event.data.valueOf();
-
-          websocket.send(
-            typeof message == "object" ? JSON.stringify(message) : message,
-          );
-        },
-      };
-    }),
-  );
+  .get("/bus-location", upgradeWebSocket(busLocation));
 
 const port = 3000;
 console.log(`Server is running on http://localhost:${port.toString()}`);
