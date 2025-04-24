@@ -1,21 +1,20 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
+import { login } from "./login.js";
+import { busLocation, busLocationWebSocket } from "./bus-location.js";
 
 const app = new Hono()
-  .get("/", (context) => {
-    return context.text("Hello Hono!");
-  })
-  .get("/teste", (c) => {
-    return c.text("Hello");
-  });
+  .route("/login", login)
+  .route("/bus-location", busLocation);
 
 const port = 3000;
 console.log(`Server is running on http://localhost:${port.toString()}`);
 
-serve({
+const server = serve({
   fetch: app.fetch,
   port,
 });
+busLocationWebSocket(server);
 
 type App = typeof app;
 
