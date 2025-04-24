@@ -26,7 +26,6 @@ coverage
 out/
 build
 dist
-generated/
 
 
 # Debug
@@ -37,11 +36,3 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
-
-# Build artifacts
-ios/
-android/
-
-# Database
-dev.db
-dev.db-journal

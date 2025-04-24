@@ -3,7 +3,6 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "prebuild": "turbo prebuild --filter=driver-frontend",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
@@ -23,7 +22,7 @@
     "typescript": "5.5.4",
     "typescript-eslint": "^8.24.0"
   },
-  "packageManager": "pnpm@10.9.0",
+  "packageManager": "pnpm@10.2.1",
   "engines": {
     "node": ">=18"
   }
