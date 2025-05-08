@@ -2,7 +2,7 @@ import { Hono } from "hono";
 
 const app = new Hono();
 
-const route = app.get("/login", (context) => {
+const route = app.get("/", (context) => {
   return context.text("oi");
 });
 

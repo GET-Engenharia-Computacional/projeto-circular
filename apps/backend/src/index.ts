@@ -4,8 +4,8 @@ import { login } from "./login.js";
 import { busLocation, busLocationWebSocket } from "./bus-location.js";
 
 const app = new Hono()
-  .route("/login", login)
-  .route("/bus-location", busLocation);
+  .route("/", busLocation) // For some reason the endpoint has to be defined on the route definition instead of the route grouping, otherwise the websocat will run in the wrong endpoint
+  .route("/login", login);
 
 const port = 3000;
 console.log(`Server is running on http://localhost:${port.toString()}`);
